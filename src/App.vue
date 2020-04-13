@@ -55,38 +55,18 @@ export default {
 
     redLineChoices: function() {
       let choice = "";
-      if (
-        this.redDiceChoices.whiteDices >=
-          this.redDiceChoices.white1AndRedDices &&
-        this.redDiceChoices.whiteDices >=
-         this.redDiceChoices.white2AndRedDices
-      ) {
-        choice =
-          "Une combinaison au choix ";
-      } else if (
-        this.redDiceChoices.whiteDices <
-          this.redDiceChoices.white1AndRedDices &&
-        this.redDiceChoices.whiteDices > this.redDiceChoices.white2AndRedDices
-      ) {
-        choice =
-          "Soit les 'whiteDices' puis le 'white1AndRedDices' soit juste le'white2AndRedDices'  ";
-      } else if (
-        this.redDiceChoices.whiteDices <
-          this.redDiceChoices.white2AndRedDices &&
-        this.redDiceChoices.whiteDices > this.redDiceChoices.white1AndRedDices
-      ) {
-        choice =
-          "Soit les 'whiteDices' puis le 'white2AndRedDices' soit juste le'white1AndRedDices'  ";
-      } else if (
-        this.redDiceChoices.whiteDices <
-          this.redDiceChoices.white1AndRedDices &&
-        this.redDiceChoices.whiteDices < this.redDiceChoices.white2AndRedDices
-      ) {
-        choice =
-          "Le'whiteDices' puis le 'white1AndRedDices' OU 'white2AndRedDices'  ";
+      if (this.redDiceChoices.whiteDices >= this.redDiceChoices.white1AndRedDices
+          && this.redDiceChoices.whiteDices >= this.redDiceChoices.white2AndRedDices) {
+          choice = "Une seule combinaison au choix";
+      } else if (this.redDiceChoices.whiteDices < this.redDiceChoices.white1AndRedDices
+              && this.redDiceChoices.whiteDices < this.redDiceChoices.white2AndRedDices) {
+          choice = "Deux blancs, puis Blanc 1 ou 2 avec le rouge";
+      } else if (this.redDiceChoices.whiteDices < this.redDiceChoices.white1AndRedDices) {
+          choice = "Deux blancs, puis Blanc 1 avec le rouge";
+      } else if (this.redDiceChoices.whiteDices < this.redDiceChoices.white2AndRedDices) {
+          choice = "Deux blancs, puis Blanc 2 avec le rouge";
       }
       console.log(choice);
-
       return choice;
     }
   }
