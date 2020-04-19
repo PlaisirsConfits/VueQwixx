@@ -5,21 +5,27 @@
     <Dice :value="redDiceValue" color="red"></Dice>
     <Dice :value="yellowDiceValue" color="yellow"></Dice>
     <Dice :value="blueDiceValue" color="blue"></Dice>
-    <Dice :value="greenDiceValue" color="green"></Dice>
-    <Button @click="rollTheDice">Lancer les dés!</Button>
+    <Dice :value="greenDiceValue" color="lightgreen"></Dice>
 
-    <div>Choix possibles : {{redDiceChoices}}</div>
-    <div>yo : {{redLineChoices}}</div>
+    <div>
+      <Button @click="rollTheDice">Lancer les dés!</Button>
+    </div>
+
+    <Playrow style="margin:auto" color="red" v-on:onCheckCount="redCheckCount = $event" ></Playrow>
+{{redCheckCount}}
+    <div>Les possibles : {{redLineChoices}}</div>
   </div>
 </template>
 
 <script>
 import Dice from "./components/Dice.vue";
+import Playrow from "./components/Playrow.vue";
 
 export default {
   name: "App",
   components: {
-    Dice
+    Dice,
+    Playrow
   },
   data: function() {
     return {
@@ -32,16 +38,18 @@ export default {
 
       whiteDices: Number,
       white1AndRedDices: Number,
-      white2AndRedDices: Number
+      white2AndRedDices: Number,
+
+      redCheckCount: 0
     };
   },
   methods: {
     rollTheDice: function() {
       this.redDiceValue = Math.floor(Math.random() * 6) + 1;
       this.yellowDiceValue = Math.floor(Math.random() * 6) + 1;
-      (this.blueDiceValue = Math.floor(Math.random() * 6) + 1),
-        (this.greenDiceValue = Math.floor(Math.random() * 6) + 1);
-      this.white1DiceValue = Math.floor(Math.random() * 6) + 1;
+      this.blueDiceValue = Math.floor(Math.random() * 6) + 1;
+      this.greenDiceValue = Math.floor(Math.random() * 6) + 1;
+      this.white1DiceValue = Math.floor(Math.random() * 6) + 1; 
       this.white2DiceValue = Math.floor(Math.random() * 6) + 1;
     }
   },
@@ -58,34 +66,28 @@ export default {
       if (
         this.redDiceChoices.whiteDices >=
           this.redDiceChoices.white1AndRedDices &&
-        this.redDiceChoices.whiteDices >=
-         this.redDiceChoices.white2AndRedDices
+        this.redDiceChoices.whiteDices >= this.redDiceChoices.white2AndRedDices
       ) {
-        choice =
-          "Une combinaison au choix ";
+        choice = `Une SEULE combinaison au choix soit ${this.redDiceChoices.whiteDices}, ${this.redDiceChoices.white1AndRedDices} ou ${this.redDiceChoices.white2AndRedDices}`;
       } else if (
         this.redDiceChoices.whiteDices <
           this.redDiceChoices.white1AndRedDices &&
-        this.redDiceChoices.whiteDices > this.redDiceChoices.white2AndRedDices
+        this.redDiceChoices.whiteDices >= this.redDiceChoices.white2AndRedDices
       ) {
-        choice =
-          "Soit les 'whiteDices' puis le 'white1AndRedDices' soit juste le'white2AndRedDices'  ";
+        choice = `Soit les dés blancs (${this.redDiceChoices.whiteDices}) puis  ${this.redDiceChoices.white1AndRedDices}; soit juste le ${this.redDiceChoices.white2AndRedDices}`;
       } else if (
         this.redDiceChoices.whiteDices <
           this.redDiceChoices.white2AndRedDices &&
-        this.redDiceChoices.whiteDices > this.redDiceChoices.white1AndRedDices
+        this.redDiceChoices.whiteDices >= this.redDiceChoices.white1AndRedDices
       ) {
-        choice =
-          "Soit les 'whiteDices' puis le 'white2AndRedDices' soit juste le'white1AndRedDices'  ";
+        choice = `Soit les dés blancs (${this.redDiceChoices.whiteDices}) puis  ${this.redDiceChoices.white2AndRedDices}; soit juste le ${this.redDiceChoices.white1AndRedDices}`;
       } else if (
         this.redDiceChoices.whiteDices <
           this.redDiceChoices.white1AndRedDices &&
         this.redDiceChoices.whiteDices < this.redDiceChoices.white2AndRedDices
       ) {
-        choice =
-          "Le'whiteDices' puis le 'white1AndRedDices' OU 'white2AndRedDices'  ";
+        choice = `Les dés blancs (${this.redDiceChoices.whiteDices}) puis l'une des deux autres combinaisons :  ${this.redDiceChoices.white1AndRedDices} ou ${this.redDiceChoices.white2AndRedDices}`;
       }
-      console.log(choice);
 
       return choice;
     }
