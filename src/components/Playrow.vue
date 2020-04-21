@@ -1,5 +1,5 @@
 <template>
-    <table :style="{'background-color':color}">
+    <table :class="['playRow', color]">
         <tr>
             <td v-for="n in 11" :key="n">{{ n +1 }}</td>
             <td>🔒</td>
@@ -33,10 +33,17 @@
 
         computed: {
             checkedCount: function () {
-                console.log(12)
                 return this.checkedValues.length
             }
         }
     };
 </script>
 
+<style>
+    .playRow {
+        margin: auto;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+</style>

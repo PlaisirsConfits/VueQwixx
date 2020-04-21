@@ -1,10 +1,11 @@
 <template>
-    <img :src="'/assets/'+value+'.svg.png'" :style="{'background-color':color}"/>
+    <img :class="['dice', color]" :src="'/assets/'+value+'.svg.png'" />
 </template>
 
 <script>
     export default {
         name: "Dice",
+        methods: {},
         props: {
 
             value: {
@@ -16,9 +17,15 @@
         data: function () {
             return {};
         },
-        methods: {},
 
         computed: {}
     };
 </script>
 
+<style scoped>
+    .dice {
+        margin: 5px;
+        border-radius: 8px;
+
+    }
+</style>
