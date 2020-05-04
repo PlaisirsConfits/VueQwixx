@@ -1,8 +1,13 @@
 <template>
-    <table :class="['playRow', color]">
-        <tr>
+    <table :class="['playRow', color]" >
+
+        <tr v-if="this.color==='red' ||this.color==='yellow'">
             <td v-for="n in 11" :key="n">{{ n +1 }}</td>
-            <td>🔒</td>
+            <td><img class="padlock" src="/assets/padlock.png"></td>
+        </tr>
+        <tr v-else>
+            <td v-for="n in 11" :key="n">{{ 13- n }}</td>
+            <td><img class="padlock" src="/assets/padlock.png"></td>
         </tr>
         <tr>
             <td v-for="n in 12" :key="n">
@@ -14,6 +19,7 @@
             </td>
         </tr>
     </table>
+
 </template>
 
 <script>
@@ -44,6 +50,9 @@
         margin: auto;
         border-radius: 5px;
         width: 100%;
+    }
+    .padlock{
+        width: 10px;
     }
 
 </style>
