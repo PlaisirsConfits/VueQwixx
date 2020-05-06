@@ -10,14 +10,24 @@
             <td><img class="padlock" src="/assets/padlock.png"></td>
         </tr>
         <tr v-if="this.color==='red' ||this.color==='yellow'">
-            <td v-for="n in 12" :key="n">
-<!--                <div :class="{'disabledCellColor' : disabledCell}"-->
+            <td
+                    v-for="n in 12"
+                    :key="n"
+
+                    :set="disabled =  lastCheckedPosition>=n"
+
+                     class="disabledCellColor"
+            >
+<!--                <div :class="{'disabledCellColor' : disabledCell}">-->
+
+
+                {{ disabled }}
 
                     <input
 
                             type="checkbox"
                             :value="n+1"
-                            :disabled="lastCheckedPosition>=n"
+                            :disabled="disabled"
                             v-model="checkedValues"
                             v-on:change="$emit('onCheckCount', checkedCount)"
 
@@ -26,7 +36,6 @@
 
 
 <!--                </div>-->
-
 
             </td>
         </tr>
@@ -60,7 +69,7 @@
             return {
                 checkedValues: [],
                 lastCheckedPosition: 0,
-                disabled: false,
+                //disableddsdsdsds: false,
                 // disabledCell: false,
 
 
