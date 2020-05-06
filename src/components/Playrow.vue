@@ -1,5 +1,5 @@
 <template>
-    <table :class="['playRow', color]" >
+    <table :class="['playRow', color]">
 
         <tr v-if="this.color==='red' ||this.color==='yellow'">
             <td v-for="n in 11" :key="n">{{ n +1 }}</td>
@@ -9,13 +9,39 @@
             <td v-for="n in 11" :key="n">{{ 13- n }}</td>
             <td><img class="padlock" src="/assets/padlock.png"></td>
         </tr>
-        <tr>
+        <tr v-if="this.color==='red' ||this.color==='yellow'">
+            <td v-for="n in 12" :key="n">
+<!--                <div :class="{'disabledCellColor' : disabledCell}"-->
+
+                    <input
+
+                            type="checkbox"
+                            :value="n+1"
+                            :disabled="lastCheckedPosition>=n"
+                            v-model="checkedValues"
+                            v-on:change="$emit('onCheckCount', checkedCount)"
+
+                            v-on:click="lastCheckedPosition =n"
+                    />
+
+
+<!--                </div>-->
+
+
+            </td>
+        </tr>
+        <tr v-else>
             <td v-for="n in 12" :key="n">
                 <input
                         type="checkbox"
-                        :value="n+1"
+                        :value="13-n"
+                        :disabled="lastCheckedPosition>=n"
                         v-model="checkedValues"
-                        v-on:change="$emit('onCheckCount', checkedCount)"/>
+                        v-on:change="$emit('onCheckCount', checkedCount)"
+                        v-on:click="lastCheckedPosition =n"
+
+
+                />
             </td>
         </tr>
     </table>
@@ -32,17 +58,34 @@
         },
         data: function () {
             return {
-                checkedValues: []
-            };
+                checkedValues: [],
+                lastCheckedPosition: 0,
+                disabled: false,
+                // disabledCell: false,
+
+
+
+
+            };        },
+        methods: {
+
         },
-        methods: {},
 
         computed: {
             checkedCount: function () {
                 return this.checkedValues.length
-            }
+            },
+            // getDisabled: function(){
+            //     return !this.disabledCell
+            // }
+
+
+
         }
-    };
+
+
+    }
+    ;
 </script>
 
 <style>
@@ -51,8 +94,18 @@
         border-radius: 5px;
         width: 100%;
     }
-    .padlock{
+
+    .padlock {
         width: 10px;
     }
+
+    .disabledCellColor {
+        background-color: black;
+    }
+
+    /*.playRow input:disabled {*/
+
+    /*}*/
+
 
 </style>

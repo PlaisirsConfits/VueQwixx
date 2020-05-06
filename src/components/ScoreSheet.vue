@@ -1,7 +1,9 @@
 <template>
     <div class="scoreSheet">
         <Playrow color="red"
-                 v-on:onCheckCount="redCheckCount = $event"></Playrow>
+                 v-on:onCheckCount="redCheckCount = $event"
+
+        ></Playrow>
         <Playrow color="yellow"
                  v-on:onCheckCount="yellowCheckCount = $event"></Playrow>
         <Playrow color="green"
@@ -18,7 +20,7 @@
             <tr>
                 <td> Points</td>
                 <td v-for="memoScore in memoScores" :key="memoScore.id"> {{memoScore.score}}</td>
-                <td v-for="n in 4" :key="n"><input type="checkbox"  :value="n" v-model="checkedPenalities"></td>
+                <td v-for="n in 4" :key="n"><input type="checkbox" :value="n" v-model="checkedPenalities"></td>
 
             </tr>
         </Table>
@@ -30,7 +32,7 @@
         +
         <div class="scoreTotal blue"> {{memoScores[blueCheckCount].score}}</div>
         -
-        <div class="scoreTotal white">  {{checkedPenalitiesCount}}</div>
+        <div class="scoreTotal white"> {{checkedPenalitiesCount}}</div>
         =
         <div class="scoreTotal" id="final"> TOTAL <br> {{globalScore.finalScore}}</div>
     </div>
@@ -132,20 +134,20 @@
 </script>
 
 <style scoped>
-.scoreSheet {
-    border-radius: 2%;
-    border: 10px solid orange;
-    width: 45%;
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    background-color: mediumspringgreen;
-}
+    .scoreSheet {
+        border-radius: 2%;
+        border: 10px solid orange;
+        width: 45%;
+        display: inline-block;
+        margin: 5px;
+        padding: 5px;
+        background-color: mediumspringgreen;
+    }
 
     #final {
         background-image: url("/assets/final.png");
         background-size: contain;
-        color: orange ;
+        color: orange;
         font-weight: bolder;
     }
 </style>--+++

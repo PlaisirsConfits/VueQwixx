@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div>
+            <p>
+                <router-link to="/"> Quitter la partie</router-link>
+            </p>
+        </div>
         <div id="qwixx" v-if="Number($route.params.players)">
 
 
@@ -15,10 +20,12 @@
                 <input type="button" id="buttonPlay" @click="rollTheDice" value="Lancer les dés!"/>
             </div>
 
-            <ScoreSheet v-for="n in Number($route.params.players)" :key="n"> </ScoreSheet>
+            <ScoreSheet v-for="n in Number($route.params.players)" :key="n"></ScoreSheet>
 
         </div>
-        <div class="red" v-else>NOOOOPE</div>
+        <div class="red" v-else>Il semble qu'il y ait une petite erreur ...
+            <router-link to="/"> Retour</router-link>
+        </div>
     </div>
 </template>
 
@@ -116,7 +123,7 @@
         background-image: url("/assets/motif.png");
         background-size: 50%;
         height: 100vh;
-        margin:0;
+        margin: 0;
 
 
     }
@@ -191,8 +198,7 @@
         margin: 5px;
         padding: 5px;
         display: inline-block;
-            }
-
+    }
 
 
 </style>
